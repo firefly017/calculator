@@ -5,30 +5,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculator</title>
+    <link href="styles.css" rel="stylesheet">
     <script src="./script.js" defer></script>
 </head>
 
 <body>
-    <button onclick="onNumber(0)">0</button>
-    <button onclick="onNumber(1)">1</button>
-    <button onclick="onNumber(2)">2</button>
-    <button onclick="onNumber(3)">3</button>
-    <button onclick="onNumber(4)">4</button>
-    <button onclick="onNumber(5)">5</button>
-    <button onclick="onNumber(6)">6</button>
-    <button onclick="onNumber(7)">7</button>
-    <button onclick="onNumber(8)">8</button>
-    <button onclick="onNumber(9)">9</button>
+    <div class="calc_grid">
+        <div class="display">
+            <div id="prev_operand" class="prev_operand"></div>
+            <div id="curr_operand" class="curr_operand">FEED ME NUMBERS</div>
+        </div>
+        <button onclick="onNumber(0)">0</button>
+        <button onclick="onNumber(1)">1</button>
+        <button onclick="onNumber(2)">2</button>
+        <button onclick="onNumber(3)">3</button>
+        <button onclick="onNumber(4)">4</button>
+        <button onclick="onNumber(5)">5</button>
+        <button onclick="onNumber(6)">6</button>
+        <button onclick="onNumber(7)">7</button>
+        <button onclick="onNumber(8)">8</button>
+        <button onclick="onNumber(9)">9</button>
 
 
-    <button onclick="onOperator('+')">+</button>
-    <button onclick="onOperator('-')">-</button>
-    <button onclick="onOperator('*')">*</button>
-    <button onclick="onOperator('/')">/</button>
-    <button onclick="operate()">=</button>
-    <button onclick="clearCalculation()">AC</button>
+        <button onclick="onOperator('+')">+</button>
+        <button onclick="onOperator('-')">-</button>
+        <button onclick="onOperator('*')">*</button>
+        <button onclick="onOperator('/')">/</button>
+        <button onclick="operate()">=</button>
+        <button onclick="clearCalculation()">AC</button>
 
-    <p id="result"></p>
+        <p id="result"></p>
+    </div>
 </body>
 
 </html>
