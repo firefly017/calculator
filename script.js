@@ -2,12 +2,14 @@ let operand1 = 0;
 let operand2 = 0;
 let lastOperator = "";
 let displayNum = "";
+let decimalCount = 0;
+let hasDecimal = false;
 function onNumber(number) {
   if (lastOperator == "") {
-    operand1 = operand1 * 10 + number;
+    operand1 = addDigit(operand1, number);
     displayNum = operand1;
   } else {
-    operand2 = operand2 * 10 + number;
+    operand2 = addDigit(operand2, number);
     displayNum = operand2;
   }
   document.getElementById("result").innerHTML = displayNum;
@@ -20,6 +22,7 @@ function onOperator(operator) {
   }
   document.getElementById("result").innerHTML = operand1;
   lastOperator = operator;
+  hasDecimal = false;
 }
 function operate() {
   if (lastOperator == "+") operand1 = operand1 + operand2;
@@ -35,6 +38,7 @@ function operate() {
       return;
     }
   }
+  hasDecimal = !Number.isInteger(operand1);
   operand2 = 0;
   lastOperator = "";
   document.getElementById("result").innerHTML = operand1;
@@ -46,4 +50,25 @@ function clearCalculation() {
   lastOperator = "";
   operand1 = 0;
   document.getElementById("result").innerHTML = 0;
+  hasDecimal = false;
+}
+
+function onDecimal() {
+  if (hasDecimal) return;
+  hasDecimal = true;
+  document.getElementById("result").innerHTML += ".";
+}
+
+function addDigit(number, digit) {
+  let decimalCount = 0;
+  let divisor = 1;
+  while (!Number.isInteger(number)) {
+    number = number * 10;
+    decimalCount++;
+    divisor = divisor * 10;
+  }
+  if (hasDecimal) divisor = divisor * 10;
+  number = number * 10 + digit;
+  number = number / divisor;
+  return number;
 }

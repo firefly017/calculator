@@ -13,8 +13,10 @@
     <div class="calc_grid">
         <div class="display">
             <div id="prev_operand" class="prev_operand"></div>
-            <div id="result" class="result">FEED ME NUMBERS</div>
+            <div id="result" class="result">0</div>
         </div>
+        <button class="two_fields" onclick="clearCalculation()">AC</button>
+
         <button onclick="onNumber(0)">0</button>
         <button onclick="onNumber(1)">1</button>
         <button onclick="onNumber(2)">2</button>
@@ -25,16 +27,14 @@
         <button onclick="onNumber(7)">7</button>
         <button onclick="onNumber(8)">8</button>
         <button onclick="onNumber(9)">9</button>
-
+        <button onclick="onDecimal()">.</button>
 
         <button onclick="onOperator('+')">+</button>
         <button onclick="onOperator('-')">-</button>
         <button onclick="onOperator('*')">*</button>
         <button onclick="onOperator('/')">/</button>
-        <button onclick="operate()">=</button>
-        <button onclick="clearCalculation()">AC</button>
+        <button class="two_fields" onclick="operate()">=</button>
 
-        <p id="result"></p>
     </div>
 </body>
 
