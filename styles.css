@@ -58,7 +58,7 @@ body {
   font-size: 1.2rem;
 }
 
-.display .curr_operand {
+.display .result {
   color: white;
   font-size: 2rem;
 }
