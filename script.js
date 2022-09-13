@@ -39,6 +39,9 @@ function operate() {
     }
   }
   hasDecimal = !Number.isInteger(operand1);
+  if (hasDecimal) {
+    decimalCount = getDecimalCount(operand1);
+  }
   operand2 = 0;
   lastOperator = "";
   document.getElementById("result").innerHTML = operand1;
@@ -56,19 +59,65 @@ function clearCalculation() {
 function onDecimal() {
   if (hasDecimal) return;
   hasDecimal = true;
+  decimalCount = 0;
   document.getElementById("result").innerHTML += ".";
 }
 
 function addDigit(number, digit) {
-  let decimalCount = 0;
-  let divisor = 1;
+  if (!hasDecimal) return number * 10 + digit;
+  decimalCount++;
+  let divisior = 1;
+  for (let i = 0; i < decimalCount; i++) {
+    digit = digit / 10;
+    divisior = divisior * 10;
+  }
+  number = number + digit;
+  return Math.round((number + Number.EPSILON) * divisior) / divisior;
+}
+function getDecimalCount(number) {
+  let curDecimalCount = 0;
   while (!Number.isInteger(number)) {
     number = number * 10;
-    decimalCount++;
-    divisor = divisor * 10;
+    curDecimalCount++;
   }
-  if (hasDecimal) divisor = divisor * 10;
-  number = number * 10 + digit;
-  number = number / divisor;
-  return number;
+  return curDecimalCount;
+}
+function onBackspace() {
+  if (hasDecimal) {
+    if (lastOperator == "") {
+      operand1 = removeLastPress(operand1);
+    } else {
+      operand2 = removeLastPress(operand2);
+    }
+  } else if (operand2 != 0) {
+    operand2 = removeLastPress(operand2);
+  } else if (lastOperator != "") {
+    lastOperator == "";
+  } else {
+    operand1 = removeLastPress(operand1);
+  }
+  if (operand2 == 0) document.getElementById("result").innerHTML = operand1;
+  else document.getElementById("result").innerHTML = operand2;
+}
+
+function removeLastPress(digit) {
+  if (!hasDecimal) {
+    digit = digit - (digit % 10);
+    digit = digit / 10;
+    return digit;
+  }
+  if (decimalCount == 0) {
+    hasDecimal = false;
+    return digit;
+  }
+  let div = 1;
+  for (let i = 0; i < decimalCount; i++) {
+    div = div * 10;
+  }
+  digit = digit * div;
+  digit = Math.round(digit);
+  digit = digit - (digit % 10);
+  digit = digit / div;
+  decimalCount--;
+  return digit;
 }
