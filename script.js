@@ -129,11 +129,14 @@ document.addEventListener("keydown", function (event) {
     if (event.keyCode == 56) {
       onOperator("*");
     }
-    if (event.keyCode == 61) {
+    if (event.keyCode == 61 || event.keyCode == 187) {
       onOperator("+");
     }
     if (event.keyCode == 191) {
       onOperator("/");
+    }
+    if (event.keyCode == 189) {
+      onOperator("-");
     }
     return;
   }
@@ -153,6 +156,9 @@ document.addEventListener("keydown", function (event) {
     operate();
   }
   if (event.keyCode == 190) {
+    onDecimal();
+  }
+  if (event.keyCode == 187) {
     onDecimal();
   }
 });
