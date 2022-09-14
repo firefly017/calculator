@@ -121,3 +121,38 @@ function removeLastPress(digit) {
   decimalCount--;
   return digit;
 }
+document.addEventListener("keydown", function (event) {
+  console.log(
+    event.keyCode + " " + event.altKey + event.metaKey + event.shiftKey
+  );
+  if (event.shiftKey) {
+    if (event.keyCode == 56) {
+      onOperator("*");
+    }
+    if (event.keyCode == 61) {
+      onOperator("+");
+    }
+    if (event.keyCode == 191) {
+      onOperator("/");
+    }
+    return;
+  }
+  if (event.keyCode >= 48 && event.keyCode <= 57) {
+    onNumber(event.keyCode - 48);
+  }
+  if (event.keyCode >= 96 && event.keyCode <= 105) {
+    onNumber(event.keyCode - 96);
+  }
+  if (event.keyCode == 8) {
+    onBackspace();
+  }
+  if (event.keyCode == 173) {
+    onOperator("-");
+  }
+  if (event.keyCode == 61) {
+    operate();
+  }
+  if (event.keyCode == 190) {
+    onDecimal();
+  }
+});
